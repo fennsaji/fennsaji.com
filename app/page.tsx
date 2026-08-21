@@ -29,7 +29,7 @@ export default function HomePage() {
       {/* Hero */}
       <FadeIn>
         <section className="mb-24">
-        <p className="font-mono text-sm text-[var(--accent)] mb-4">// hello world</p>
+        <p className="font-mono text-sm text-[var(--accent)] mb-4">{'// hello world'}</p>
         <h1 className="text-5xl font-extrabold tracking-tight text-[var(--text)] leading-tight mb-4">
           I&apos;m Fenn Ignatius Saji.
           <br />
