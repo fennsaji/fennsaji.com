@@ -2,23 +2,32 @@ import { FadeIn } from '@/components/FadeIn'
 
 export const metadata = {
   title: 'About',
-  description: 'Fenn Ignatius Saji — Lead Blockchain Developer with expertise in Rust, Substrate, Solidity, and full-stack development. 6+ years building blockchain infrastructure.',
+  description: 'Fenn Ignatius Saji — senior software engineer building distributed systems, blockchain infrastructure, and ZK identity in Rust and Substrate.',
   openGraph: {
     title: 'About — Fenn Ignatius Saji',
-    description: 'Lead Blockchain Developer with expertise in Rust, Substrate, Solidity, and full-stack development.',
+    description: 'Senior software engineer building distributed systems, blockchain infrastructure, and cryptography-backed identity products.',
     url: 'https://fennsaji.com/about',
   },
   alternates: { canonical: 'https://fennsaji.com/about' },
 }
 
 const stack = [
-  'Rust', 'TypeScript', 'React', 'Next.js',
-  'Substrate', 'Blockchain', 'Angular', 'Node.js', 'AWS',
+  'Rust', 'Substrate', 'Blockchain', 'Cryptography',
+  'TypeScript', 'React', 'Next.js', 'Node.js', 'AWS',
+]
+
+const interests = [
+  'Rust internals & systems programming',
+  'Distributed systems & consensus',
+  'Blockchain infrastructure',
+  'Post-quantum & zero-knowledge cryptography',
+  'Decentralised identity',
+  'AI-powered products',
 ]
 
 const timeline = [
   { year: '2023 →', label: 'Lead Blockchain Developer at McKinley Rice — in charge of blockchain development and overall app development, Rust backend, Solidity contracts, identity and cryptography.' },
-  { year: '2021 →', label: 'Senior Blockchain Developer at Sovereign Wallet Network — self-sovereign identity and Web3 architecture' },
+  { year: '2021 →', label: 'Senior Blockchain Developer at Sovereign Wallet Network — decentralised identity and Web3 architecture' },
   { year: '2021 →', label: 'Blockchain Developer at Squbix Digital — DeFi on Substrate + Rust' },
   { year: '2019 →', label: 'Software Engineer at Perfomatix — MEAN stack, web apps' },
   { year: '2018 →', label: 'Web Developer at ScopeHub LLC — Angular apps and Ethereum Solidity prototypes' },
@@ -36,9 +45,34 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <p className="text-[var(--muted)] leading-relaxed mb-12">
-        I&apos;m a software engineer with roots in blockchain and systems programming. I&apos;ve spent the last few years deep in Rust, Substrate, and self-sovereign identity — building infrastructure at McKinley Rice and Sovereign Wallet Network. Before that, MEAN stack web development at Perfomatix, and early Ethereum experiments as a freelancer. I build side projects to scratch my own itches and stay sharp.
+      <p className="text-[var(--body)] leading-relaxed mb-6">
+        I build distributed systems, blockchain infrastructure, and the backend
+        systems and products they run on — from custom consensus engines and
+        zero-knowledge identity to financial and AI-powered apps. I started in
+        web development, moved into Ethereum and DeFi, then into Substrate and
+        decentralised identity, and now spend most of my time deep in Rust and
+        backend infrastructure at McKinley Rice and Sovereign Wallet Network.
       </p>
+
+      <p className="text-[var(--body)] leading-relaxed mb-12">
+        I like building things end-to-end — from protocol design and backend
+        infrastructure through to the product people actually use. I build
+        side projects to scratch my own itches and stay sharp.
+      </p>
+
+      <section className="mb-12">
+        <p className="font-mono text-xs text-[var(--muted)] uppercase tracking-widest mb-4">
+          Currently interested in
+        </p>
+        <ul className="flex flex-col gap-2">
+          {interests.map((interest) => (
+            <li key={interest} className="text-sm text-[var(--body)]">
+              <span className="text-[var(--accent)] mr-2">→</span>
+              {interest}
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section className="mb-12">
         <p className="font-mono text-xs text-[var(--muted)] uppercase tracking-widest mb-4">
@@ -62,9 +96,9 @@ export default function AboutPage() {
         </p>
         <ul className="border-l border-[var(--border)] pl-6 flex flex-col gap-4">
           {timeline.map(({ year, label }) => (
-            <li key={year} className="text-sm">
+            <li key={label} className="text-sm">
               <span className="font-mono text-[var(--accent)] mr-2">{year}</span>
-              <span className="text-[var(--muted)]">{label}</span>
+              <span className="text-[var(--body)]">{label}</span>
             </li>
           ))}
         </ul>

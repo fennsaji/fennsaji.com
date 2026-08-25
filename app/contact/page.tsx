@@ -2,10 +2,10 @@ import { FadeIn } from '@/components/FadeIn'
 
 export const metadata = {
   title: 'Contact',
-  description: 'Get in touch with Fenn Ignatius Saji — open to collaborations, opportunities, and interesting conversations.',
+  description: 'Get in touch with Fenn Ignatius Saji — open to Rust, distributed systems, and blockchain infrastructure work.',
   openGraph: {
     title: 'Contact — Fenn Ignatius Saji',
-    description: 'Get in touch — open to collaborations, opportunities, and interesting conversations.',
+    description: 'Open to Rust, distributed systems, and blockchain infrastructure work.',
     url: 'https://fennsaji.com/contact',
   },
   alternates: { canonical: 'https://fennsaji.com/contact' },
@@ -21,9 +21,9 @@ export default function ContactPage() {
   return (
     <FadeIn>
       <div className="max-w-2xl mx-auto px-6 py-20">
-      <h1 className="text-3xl font-extrabold tracking-tight mb-4">Say hello.</h1>
-      <p className="text-[var(--muted)] text-sm mb-12">
-        Open to interesting conversations, collaborations, and opportunities.
+      <h1 className="text-3xl font-extrabold tracking-tight mb-4">Interested in building difficult things?</h1>
+      <p className="text-[var(--body)] text-sm mb-12">
+        I&apos;m particularly interested in Rust, distributed systems, blockchain infrastructure, and backend engineering roles or collaborations.
       </p>
       <ul className="flex flex-col divide-y divide-[var(--border)]">
         {links.map(({ label, href, display }) => (

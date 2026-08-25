@@ -9,7 +9,12 @@ const links = [
   { href: '/contact', label: 'contact' },
 ]
 
-export function Nav() {
+interface NavProps {
+  /** Absolute/relative URL of the resume; when undefined no resume link is rendered. */
+  resumeHref?: string
+}
+
+export function Nav({ resumeHref }: NavProps) {
   const pathname = usePathname()
 
   return (
@@ -29,7 +34,7 @@ export function Nav() {
               <Link
                 href={href}
                 className={`text-sm transition-colors ${
-                  pathname === href
+                  pathname === href || pathname.startsWith(`${href}/`)
                     ? 'text-[var(--text)]'
                     : 'text-[var(--muted)] hover:text-[var(--text)]'
                 }`}
@@ -38,6 +43,18 @@ export function Nav() {
               </Link>
             </li>
           ))}
+          {resumeHref && (
+            <li>
+              <a
+                href={resumeHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[var(--muted)] hover:text-[var(--text)] transition-colors"
+              >
+                resume ↗
+              </a>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

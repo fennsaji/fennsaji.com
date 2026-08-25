@@ -1,7 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const runtime = 'edge'
-export const alt = 'Fenn Ignatius Saji — Rust & Blockchain Engineer'
+export const alt = 'Fenn Ignatius Saji — Rust, Distributed Systems & Blockchain Engineer'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -36,7 +35,7 @@ export default function OgImage() {
             Fenn Ignatius Saji
           </div>
           <div style={{ color: '#e0e0e0', fontSize: 28, fontWeight: 400 }}>
-            Rust · Blockchain · Full-stack
+            Rust · Distributed Systems · Blockchain
           </div>
         </div>
 
@@ -44,7 +43,7 @@ export default function OgImage() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ color: '#555555', fontSize: 18 }}>fennsaji.com</div>
           <div style={{ display: 'flex', gap: 16 }}>
-            {['Rust', 'Substrate', 'Solidity', 'TypeScript'].map((tag) => (
+            {['Rust', 'Substrate', 'Cryptography', 'TypeScript'].map((tag) => (
               <div
                 key={tag}
                 style={{

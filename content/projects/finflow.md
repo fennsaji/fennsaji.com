@@ -5,7 +5,7 @@ tech: [TypeScript, Next.js, React, Supabase]
 github: https://github.com/fennsaji/finflow
 demo: https://finflow.fennsaji.com
 featured: true
-order: 4
+order: 6
 year: 2026
 ---
 

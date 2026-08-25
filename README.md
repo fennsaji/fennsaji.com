@@ -31,10 +31,17 @@ tech: [Rust, TypeScript]
 github: https://github.com/fennsaji/project-name
 demo: https://demo-url.com   # optional
 featured: true               # show on home page
+order: 1                     # optional, home-page ordering for featured projects
 year: 2025
+# Optional case-study fields, rendered on /projects/<slug>:
+problem: What was hard about this.
+architecture: How it's built.
+decisions:
+  - "Quote each decision — unquoted 'Key: value' items parse as YAML maps and fail the build."
+results: What shipped.
 ---
 
-Longer description here (reserved for future detail pages).
+Fallback body, shown on /projects/<slug> as plain text when no case-study fields are set.
 ```
 
 Required fields: `title`, `year`. All others are optional.

@@ -4,8 +4,8 @@ description: Remember every dish you've eaten. Log meals, add notes and ratings,
 tech: [TypeScript, React, Next.js, Firebase, OpenAI, Rust]
 github: https://github.com/fennsaji/remembite
 featured: true
-order: 3
+order: 5
 year: 2024
 ---
 
-A personal knowledge base with AI-powered retrieval. You paste in links, notes, or ideas; the app embeds them and lets you query in plain language. Built on Next.js with vector search for retrieval.
+Dish-level dining memory. Log the dishes you order at restaurants, record how you felt about them, and get AI-driven suggestions based on your own taste history and aggregated community ratings. Three core capabilities — remember what you've tried, discover popular dishes near you, and predict whether a new dish will suit you. Built on Next.js with Firebase and OpenAI.

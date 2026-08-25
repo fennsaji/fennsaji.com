@@ -5,7 +5,7 @@ tech: [TypeScript, Next.js, React]
 github: https://github.com/fennsaji/finkit
 demo: https://finkit.fennsaji.com
 featured: true
-order: 5
+order: 7
 year: 2026
 ---
 

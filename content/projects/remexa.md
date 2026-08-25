@@ -5,7 +5,7 @@ tech: [Flutter, Dart, Rust, Postgres]
 github: https://github.com/fennsaji/remexa
 demo: https://remexa.fennsaji.com
 featured: true
-order: 6
+order: 8
 year: 2026
 ---
 

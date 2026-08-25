@@ -6,6 +6,9 @@ import {
   getAllTags,
   sortByYear,
   sortByOrder,
+  hasCaseStudy,
+  findBySlug,
+  getPopularTags,
 } from '@/lib/projects'
 
 const RAW_MD = `---
@@ -70,6 +73,80 @@ describe('parseProject', () => {
     const p = parseProject('call-guard.md', RAW_MD)
     expect(p.content.trim()).toBe('Some body text.')
   })
+
+  it('defaults case-study fields to undefined when absent', () => {
+    const p = parseProject('call-guard.md', RAW_MD)
+    expect(p.problem).toBeUndefined()
+    expect(p.architecture).toBeUndefined()
+    expect(p.decisions).toBeUndefined()
+    expect(p.results).toBeUndefined()
+  })
+
+  it('parses optional case-study fields when present', () => {
+    const raw = RAW_MD.replace(
+      'featured: true',
+      'featured: true\nproblem: Some problem\narchitecture: Some architecture\ndecisions: [Decision one, Decision two]\nresults: Some results'
+    )
+    const p = parseProject('call-guard.md', raw)
+    expect(p.problem).toBe('Some problem')
+    expect(p.architecture).toBe('Some architecture')
+    expect(p.decisions).toEqual(['Decision one', 'Decision two'])
+    expect(p.results).toBe('Some results')
+  })
+
+  it('throws with filename when decisions is a scalar instead of a list', () => {
+    const raw = RAW_MD.replace('featured: true', 'featured: true\ndecisions: not a list')
+    expect(() => parseProject('call-guard.md', raw)).toThrow(/call-guard\.md.*decisions/)
+  })
+
+  it('throws with filename when a decisions item is an unquoted key: value map', () => {
+    const raw = RAW_MD.replace(
+      'featured: true',
+      'featured: true\ndecisions:\n  - Event-driven authoring: trades idle CPU for latency'
+    )
+    expect(() => parseProject('call-guard.md', raw)).toThrow(/call-guard\.md.*decisions/)
+  })
+
+  it('throws with filename when problem is not a string', () => {
+    const raw = RAW_MD.replace('featured: true', 'featured: true\nproblem: [a, b]')
+    expect(() => parseProject('call-guard.md', raw)).toThrow(/call-guard\.md.*problem/)
+  })
+})
+
+describe('hasCaseStudy', () => {
+  it('is false when no case-study fields are set', () => {
+    expect(hasCaseStudy(parseProject('call-guard.md', RAW_MD))).toBe(false)
+  })
+
+  it('is true when only results is set', () => {
+    const raw = RAW_MD.replace('featured: true', 'featured: true\nresults: Shipped')
+    expect(hasCaseStudy(parseProject('call-guard.md', raw))).toBe(true)
+  })
+
+  it('is true when only decisions is set', () => {
+    const raw = RAW_MD.replace('featured: true', 'featured: true\ndecisions: [one]')
+    expect(hasCaseStudy(parseProject('call-guard.md', raw))).toBe(true)
+  })
+
+  it('is false when decisions is an empty list and nothing else is set', () => {
+    const raw = RAW_MD.replace('featured: true', 'featured: true\ndecisions: []')
+    expect(hasCaseStudy(parseProject('call-guard.md', raw))).toBe(false)
+  })
+})
+
+describe('findBySlug', () => {
+  const projects = [
+    parseProject('call-guard.md', RAW_MD),
+    parseProject('remembite.md', RAW_MD_2),
+  ]
+
+  it('returns the project with the matching slug', () => {
+    expect(findBySlug(projects, 'remembite')?.title).toBe('Remembite')
+  })
+
+  it('returns undefined for an unknown slug', () => {
+    expect(findBySlug(projects, 'nope')).toBeUndefined()
+  })
 })
 
 describe('filterFeatured', () => {
@@ -92,6 +169,28 @@ describe('getAllTags', () => {
     ]
     const tags = getAllTags(projects)
     expect(tags).toEqual(['Android', 'React', 'Rust', 'TypeScript'])
+  })
+})
+
+describe('getPopularTags', () => {
+  const projects = [
+    parseProject('a.md', RAW_MD), // Rust, Android
+    parseProject('b.md', RAW_MD_2), // TypeScript, React
+    parseProject('c.md', RAW_MD_2.replace('[TypeScript, React]', '[Rust, React]')),
+  ]
+
+  it('returns only tags used by at least two projects, sorted', () => {
+    expect(getPopularTags(projects)).toEqual(['React', 'Rust'])
+  })
+
+  it('respects a custom minimum', () => {
+    expect(getPopularTags(projects, 1)).toEqual(['Android', 'React', 'Rust', 'TypeScript'])
+    expect(getPopularTags(projects, 3)).toEqual([])
+  })
+
+  it('counts a tag once per project even if listed twice in that project\'s frontmatter', () => {
+    const duplicateTagProject = parseProject('d.md', RAW_MD.replace('[Rust, Android]', '[Rust, Rust]'))
+    expect(getPopularTags([duplicateTagProject])).toEqual([])
   })
 })
 

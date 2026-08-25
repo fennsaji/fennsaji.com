@@ -25,7 +25,9 @@ npm test -- tests/lib/projects.test.ts
 
 **One interactive component:** `components/TagFilter.tsx` is the only `'use client'` component with state. It receives all projects + tags as props from the server component (`app/projects/page.tsx`) and handles filtering client-side. All other components are server-safe.
 
-**Styling:** Tailwind CSS v4 (CSS-first — no `tailwind.config.ts`). Design tokens live in `app/globals.css` as CSS custom properties (`--bg`, `--surface`, `--card`, `--border`, `--text`, `--muted`, `--accent`). Always use these variables (e.g. `text-[var(--muted)]`) rather than hardcoded colors.
+**Styling:** Tailwind CSS v4 (CSS-first — no `tailwind.config.ts`). Design tokens live in `app/globals.css` as CSS custom properties (`--bg`, `--surface`, `--card`, `--border`, `--text`, `--body`, `--muted`, `--accent`). Always use these variables (e.g. `text-[var(--muted)]`) rather than hardcoded colors. `--text` is for headings, `--body` for long-form paragraphs, `--muted` for labels, chips, metadata, and card blurbs.
+
+**Resume:** drop a `public/resume.pdf` in place and the "Resume" button on the home hero and the nav link appear automatically (`lib/site.ts` → `hasResume()`); with no file, nothing renders.
 
 **Animations:** `components/FadeIn.tsx` wraps Framer Motion. Use it to add page-entry animations — it's the only place `framer-motion` is imported.
 
@@ -37,4 +39,6 @@ npm test -- tests/lib/projects.test.ts
 
 ## Adding a project
 
-Create `content/projects/<slug>.md`. Required frontmatter: `title` and `year` (missing either throws at build time). Optional: `description`, `tech`, `github`, `demo`, `featured`.
+Create `content/projects/<slug>.md`. Required frontmatter: `title` and `year` (missing either throws at build time). Optional: `description`, `tech`, `github`, `demo`, `featured`, `order` (ascending sort for featured projects on the home page; unordered ones sort last).
+
+Optional case-study fields render on `/projects/<slug>`: `problem`, `architecture`, `results` (strings) and `decisions` (list of strings — quote each item, an unquoted `Key: value` item parses as a YAML map and fails the build). If none are set, the markdown body is rendered instead — as plain text in one paragraph, no markdown processing.
