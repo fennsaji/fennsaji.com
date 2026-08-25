@@ -11,6 +11,7 @@ export interface Project {
   demo?: string
   featured: boolean
   year: number
+  order?: number
   content: string
 }
 
@@ -31,12 +32,17 @@ export function parseProject(filename: string, raw: string): Project {
     demo: data.demo,
     featured: data.featured ?? false,
     year: data.year,
+    order: data.order,
     content,
   }
 }
 
 export function filterFeatured(projects: Project[]): Project[] {
   return projects.filter((p) => p.featured)
+}
+
+export function sortByOrder(projects: Project[]): Project[] {
+  return [...projects].sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity))
 }
 
 export function getAllTags(projects: Project[]): string[] {
@@ -64,5 +70,5 @@ export function getProjects(): Project[] {
 }
 
 export function getFeaturedProjects(): Project[] {
-  return filterFeatured(getProjects())
+  return sortByOrder(filterFeatured(getProjects()))
 }

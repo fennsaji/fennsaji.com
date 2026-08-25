@@ -5,6 +5,7 @@ import {
   filterFeatured,
   getAllTags,
   sortByYear,
+  sortByOrder,
 } from '@/lib/projects'
 
 const RAW_MD = `---
@@ -103,5 +104,29 @@ describe('sortByYear', () => {
     const sorted = sortByYear(projects)
     expect(sorted[0].year).toBe(2024)
     expect(sorted[1].year).toBe(2023)
+  })
+})
+
+describe('sortByOrder', () => {
+  it('sorts projects by ascending order field', () => {
+    const RAW_ORDER_2 = RAW_MD.replace('featured: true', 'featured: true\norder: 2')
+    const RAW_ORDER_1 = RAW_MD_2.replace('featured: false', 'featured: true\norder: 1')
+    const projects = [
+      parseProject('call-guard.md', RAW_ORDER_2),
+      parseProject('remembite.md', RAW_ORDER_1),
+    ]
+    const sorted = sortByOrder(projects)
+    expect(sorted[0].slug).toBe('remembite')
+    expect(sorted[1].slug).toBe('call-guard')
+  })
+
+  it('sorts projects without an order field after ones with one', () => {
+    const projects = [
+      parseProject('call-guard.md', RAW_MD),
+      parseProject('remembite.md', RAW_MD_2.replace('featured: false', 'featured: true\norder: 1')),
+    ]
+    const sorted = sortByOrder(projects)
+    expect(sorted[0].slug).toBe('remembite')
+    expect(sorted[1].slug).toBe('call-guard')
   })
 })

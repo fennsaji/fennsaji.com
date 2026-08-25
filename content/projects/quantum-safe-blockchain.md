@@ -3,6 +3,7 @@ title: Substrate Blockchain with Custom Consensus
 description: Production-ready Substrate blockchain with a custom instant-confirmation consensus. Event-driven block production, fee-free transactions, and multi-layer spam protection.
 tech: [Rust, Substrate, Blockchain]
 featured: true
+order: 1
 year: 2025
 ---
 

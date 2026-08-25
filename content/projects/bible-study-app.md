@@ -3,8 +3,9 @@ title: Disciplefy
 description: AI-powered Bible study guide generator. Multi-language support, anonymous and OAuth access, cross-platform on iOS, Android, and Web.
 tech: [Flutter, TypeScript, React, Supabase, OpenAI, Firebase]
 github: https://github.com/fennsaji/disciplefy
-demo: https://play.google.com/store/apps/details?id=com.disciplefy.bible_study&hl=en_IN
+demo: https://www.disciplefy.in
 featured: true
+order: 2
 year: 2025
 ---
 

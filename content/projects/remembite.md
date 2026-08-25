@@ -4,6 +4,7 @@ description: Remember every dish you've eaten. Log meals, add notes and ratings,
 tech: [TypeScript, React, Next.js, Firebase, OpenAI, Rust]
 github: https://github.com/fennsaji/remembite
 featured: true
+order: 3
 year: 2024
 ---
 
